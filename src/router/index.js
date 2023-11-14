@@ -14,12 +14,12 @@ const routes = [
   },
   {
     path: '/ManagerComponent',
-    name: ManagerComponent,
+    name: 'ManagerComponent',
     component: ManagerComponent
   },
   {
     path: '/RegistrarProveedoresComponent',
-    name: RegistrarProveedoresComponent,
+    name: 'RegistrarProveedoresComponent',
     component: RegistrarProveedoresComponent
   },
   {

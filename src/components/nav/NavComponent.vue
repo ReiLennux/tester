@@ -37,12 +37,12 @@
             </li>
 
 
-            <CatalogoProveedoresComponent></CatalogoProveedoresComponent>
-
-
-            <li class="nav-item">
+            <catalogo-proveedores-component></catalogo-proveedores-component>
+            <catalogo-logueo-component></catalogo-logueo-component>
+            
+            <!-- <li class="nav-item">
               <a class="nav-link disabled title-nav" aria-disabled="true">Disabled</a>
-            </li>
+            </li> -->
           </ul>
           <form class="d-flex" role="search">
             <input
@@ -63,9 +63,13 @@
   
   <script>
 import CatalogoProveedoresComponent from '@/components/nav/catalogo/CatalogoProveedoresComponent'
+import CatalogoLogueoComponent from '@/components/nav/catalogo/CatalogoLogueoComponent'
   export default{
     name: "navComponent",
-    components:{CatalogoProveedoresComponent}
+    components:{
+      CatalogoProveedoresComponent,
+      CatalogoLogueoComponent: CatalogoLogueoComponent
+    }
   }
   
   </script>

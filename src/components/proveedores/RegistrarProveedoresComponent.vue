@@ -401,7 +401,7 @@ export default {
   },
   methods: {
     validateForm() {
-  this.$refs.formObserver.validate(); 
+  //this.$refs.formObserver.validateAll(); 
   console.log(this.ProveedorObj);
   this.RegistrarProveedor();
 },
@@ -439,7 +439,7 @@ export default {
       }
     },
     RegistrarProveedor(){
-      if (this.ProveedorObj) {
+      
         axios
           .post(`${API_URL}RegistrarProveedor`,this.ProveedorObj)
           .then(() => {
@@ -449,7 +449,7 @@ export default {
           .catch((error) => {
             console.error("Error al agregar nota:", error);
           });
-      }
+      
     }
   },
   created() {

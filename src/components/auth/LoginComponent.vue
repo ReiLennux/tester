@@ -12,7 +12,7 @@
                             BIENVENIDO !
                         </v-toolbar-title>
                     </v-toolbar>
-                    <form @submit.prevent="handleForm">
+                    <form @submit.prevent="Submit">
                         <v-card-text>
                             <v-text-field
                             label="Nombre de usuario"
@@ -25,19 +25,20 @@
                             ></v-text-field>
                             <div class="text--primary">
                                 <v-text-field
-                                label="Contraseña"
-                                outlined
-                                v-model="usuario.contraseña"
-                                color="indigo"
-                                clearable
-                                dense
-                                class="pa-1"
-                                type="password"
+                                    v-model="usuario.contraseña"
+                                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                                    outlined
+                                    :type="show1 ? 'text' : 'password'"
+                                    name="input-10-1"
+                                    label="Contraseña"
+                                    counter
+                                    @click:append="show1 = !show1"
+                                    dense
                                 ></v-text-field>
                             </div>
                         </v-card-text>
                         <v-card-actions>
-                            <v-btn outlined class="ma-1 pa-4 ml-auto" color="indigo" @click="validateUser">
+                            <v-btn outlined class="ma-1 pa-4 ml-auto" color="indigo" @click="Submit">
                             <i class="fas fa-sign-in-alt"></i> &nbsp;
                             Login
                             </v-btn>
@@ -49,6 +50,8 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+import Swal from 'sweetalert2'
 
 
 export default {
@@ -58,15 +61,39 @@ export default {
             usuario: {
                 nombreUsuario: "",
                 contraseña: "",
-            }
+            },
+            show1: false
         }
     },
     methods: {
-        validateUser(){
-            console.log(this.usuario.username+": "+this.usuario.contraseña);
+        
+        validateUser() {
+
+            axios.post('http://localhost:5038/api/usuarios/login', this.usuario)
+                .then(response => {
+                    if (response.data.success) {
+                        this.$store.commit('login', this.usuario.nombreUsuario);
+                        this.errorMessage = "";
+                    } else {
+                        this.errorMessage = "Usuario o contraseña incorrectos";
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Parece que la contraseña o el usuario es incorrecta",
+                        footer: 'o tal vez no eres quien dices ser...'
+                    });
+                });
+        },
+        Submit() {
+            this.validateUser();
+        }
+            
         }
     }
-}
+
 </script>
 
 <style>
