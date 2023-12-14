@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import ManagerComponent from '@/components/proveedores/ManagerComponent'
 import RegistrarProveedoresComponent from '@/components/proveedores/RegistrarProveedoresComponent'
 import LoginView from '../views/LoginView.vue'
+import BienvenidaComponent from '../components/auth/BienvenidaComponent'
 Vue.use(VueRouter)
 
 const routes = [
